@@ -102,7 +102,7 @@ export default function App() {
       <h1>API Usage Dashboard</h1>
       <p>Window: {usage.window}</p>
       <p>Successful calls: {usage.success}</p>
-      <p>Failed calls: {usage.failure}</p>
+      <p>Failed calls: {usage.failed}</p>
     </main>
   );
 }
