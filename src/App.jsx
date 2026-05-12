@@ -43,8 +43,47 @@ async function fetchUsageMetrics(signal) {
   return response.json();
 }
 
-export default function Counter() {
-  const [count, setCount] = useState(0);
+/** 
+ * Dashboard that loads backend usage data
+ * 
+ * Behavior:
+ * - Fetches usage metrics on initial mount.
+ * - Cancels in-flgiht request on unmount.
+ * - Stores loading, error, and data states separately for UI handling
+ * 
+ * @returns {JSX.Element} simple metrics panel for backend usage data
+ */
+
+export default function App() {
+  const [usage, setUsage] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadUsageMetrics() {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        const data = await fetchUsageMetrics(controller.singal);
+        setUsage(data);
+      } catch (error) {
+        if (error.name !== "AbortError") { // no need to add message when exiting
+          setErrorMessage(error.message || "Unexpected error when loading usage metrics. :(");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadUsageMetrics();
+
+    return () => {
+      controller.abort();
+    };
+  }, []); //
 
   return (
     <div>
