@@ -85,12 +85,24 @@ export default function App() {
     };
   }, []); //
 
+  if (isLoading) {
+    return <div>Loading usage metrics...</div>;
+  }
+
+  if (errorMessage) {
+    return <div>Error: {errorMessage}</div>;
+  }
+
+  if (!usage) {
+    return <div>No usage data available,</div>;
+  }
+
   return (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={() => setCount(count - 1)}>-</button>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <button onClick={() => setCount(0)}>Reset</button>
-    </div>
+    <main>
+      <h1>API Usage Dashboard</h1>
+      <p>Window: {usage.window}</p>
+      <p>Successful calls: {usage.success}</p>
+      <p>Failed calls: {usage.failure}</p>
+    </main>
   );
 }
