@@ -14,7 +14,7 @@ def read_item(item_id: int):
 def create_item(item: dict):
     return {"received": item}
 
-@app.get("api/usage")
+@app.get("/api/usage")
 def get_usage():
     return {
         "success": 6,
