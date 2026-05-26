@@ -1,4 +1,4 @@
-<?php>
+<?php
 $name = "PHP test";
 $numbers = [1, 2, 3, 4, 5];
 
@@ -10,7 +10,7 @@ if (count($numbers) > 3) {
     echo "<p>The array has 3 or fewer items.</p>";
 }
 
-echo <"ul">;
+echo "<ul>";
 foreach ($numbers as $n) {
     echo "<li>Number: $n</li>";
 }
