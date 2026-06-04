@@ -17,6 +17,10 @@ __pycache__/
 *.pyo
 *.pyd
 
+# Java / Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
